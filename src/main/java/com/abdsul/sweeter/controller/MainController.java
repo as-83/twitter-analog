@@ -20,8 +20,15 @@ public class MainController {
     @Autowired
     private MessageRepo messageRepo;
 
+    @GetMapping("/")
+    public String greet( Model model){
 
-    @GetMapping
+        model.addAttribute("hello", "Hello, user!");
+        return "greeting";
+    }
+
+
+    @GetMapping("/main")
     public String main( Model model){
 
         Iterable<Message> messages = messageRepo.findAll();
@@ -30,7 +37,7 @@ public class MainController {
         return "main";
     }
 
-    @PostMapping
+    @PostMapping("/main")
     public String add(@RequestParam String text, @RequestParam String tag, Model model){
         Message message = new Message(text, tag);
         messageRepo.save(message);
@@ -52,7 +59,6 @@ public class MainController {
        }else {
            messages = messageRepo.findAll();
        }
-
 
         model.addAttribute("messages", messages);
 
