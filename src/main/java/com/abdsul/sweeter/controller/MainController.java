@@ -7,13 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.MessageCodesResolver;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 //@RequestMapping(path = "/message")
@@ -25,17 +21,24 @@ public class MainController {
     @GetMapping("/")
     public String greet( Model model){
 
-        model.addAttribute("hello", "Hello, user!");
+
         return "greeting";
     }
 
 
     @GetMapping("/main")
-    public String main( Model model){
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
+        Iterable<Message> messages;
 
-        Iterable<Message> messages = messageRepo.findAll();
+        if (filter != null && !filter.isEmpty()) {
+            messages = messageRepo.findByTag(filter);
+        } else {
+            messages = messageRepo.findAll();
+        }
 
         model.addAttribute("messages", messages);
+        model.addAttribute("filter", filter);
+
         return "main";
     }
 
@@ -54,20 +57,6 @@ public class MainController {
         return "main";
     }
 
-    @PostMapping("filter")
-    public String filter(@RequestParam String filter, Model model){
 
-
-       Iterable<Message> messages;
-       if(filter != null && !filter.isEmpty()) {
-           messages = messageRepo.findByTag(filter);
-       }else {
-           messages = messageRepo.findAll();
-       }
-
-        model.addAttribute("messages", messages);
-
-        return "main";
-    }
 
 }
