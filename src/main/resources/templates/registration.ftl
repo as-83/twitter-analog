@@ -4,9 +4,7 @@
 <@c.page>
 
 <h3>Add new user</h3>
-
-    ${message}
-
+        ${message}
 
     <@l.login "/registration"/>
 
