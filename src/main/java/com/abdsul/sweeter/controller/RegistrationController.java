@@ -17,8 +17,7 @@ public class RegistrationController {
     private UserRepo userRepo;
 
     @GetMapping("/registration")
-    public String registration(Model model){
-        model.addAttribute("message", "");
+    public String registration(){
         return "registration";
     }
 
