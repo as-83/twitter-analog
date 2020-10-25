@@ -12,7 +12,7 @@
 
         </#list>
         <div><label> Id: <input type="hidden" name="userId" value="${user.id}"/> </label></div>
-        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+        <input type="hidden" value="${_csrf.token}" name="_csrf" />
         <button type="submit">Save</button>
     </form>
 
