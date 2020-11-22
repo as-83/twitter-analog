@@ -4,6 +4,7 @@ import com.abdsul.sweeter.entity.Role;
 import com.abdsul.sweeter.entity.User;
 import com.abdsul.sweeter.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,6 +26,10 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Value("${hostname}")
+    private String hostname;
+
+
     public UserService(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
@@ -40,9 +45,7 @@ public class UserService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepo.save(user);
-
         sendMessage(user);
-
 
         return true;
 
@@ -51,9 +54,10 @@ public class UserService implements UserDetailsService {
     private void sendMessage(User user) {
         if(!StringUtils.isEmpty(user.getEmail())){
             String message = String.format(
-                    "Hello! %s!" +
-                            "Welcome to sweeter- Twitter analog! Please, visit http://localhost:8080/activate/%s",
+                    "Hello, %s!" +
+                            "Welcome to sweeter- Twitter analog! Please, visit http://%s/activate/%s to activate your account",
                     user.getUsername(),
+                    hostname,
                     user.getActivationCode()
             );
 
