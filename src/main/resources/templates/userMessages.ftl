@@ -11,6 +11,7 @@
             </#if>
         </#if>
 
+
         <div class="container">
             <div class="row">
 
@@ -50,6 +51,7 @@
 
             </div>
         </div>
+
 
     <#if isCurrentUser>
         <#include "parts/messageEdit.ftl"/>

@@ -26,9 +26,9 @@
                 <div class="custom-file">
                     <input type="file" name="file" id="customFile" placeholder="Choose file" />
                     <label class="custom-file-label" for="customFile" >
-                        <#if message??>
+                        <#--<#if message??>
                             ${message.filename}
-                        </#if>
+                        </#if>-->
                     </label>
                 </div>
             </div>
