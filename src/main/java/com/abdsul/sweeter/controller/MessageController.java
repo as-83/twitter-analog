@@ -180,6 +180,14 @@ public class MessageController {
         return "redirect:" + components.getPath();
     }
 
+    @GetMapping("/messages/{message}/likes-list")
+    public String likesList(Model model,
+                            @PathVariable Message message){
+
+        model.addAttribute("users", message.getLikes());
+        return "subscriptions";
+    }
+
 
 
 

@@ -25,9 +25,9 @@
                                 <i class="far fa-heart"></i>
                             </#if>
                         </a>
-<#--                        <a  href="/messages/${message.id}/likes-list">-->
+                        <a  href="/messages/${message.id}/likes-list">
                             ${message.likes}
-<#--                        </a>-->
+                        </a>
                     </div>
                     <#if message.author.id == currentUserId>
                         <a class="col btn btn-primary align-self-center" href="/user-messages/${message.author.id}?message=${message.id}">Edit</a>

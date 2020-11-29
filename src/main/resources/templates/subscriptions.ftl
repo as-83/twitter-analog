@@ -1,8 +1,12 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-    <h3>${userChannel.username}</h3>
-    <div>${type}</div>
+    <#if userChannel??>
+        <h3>${userChannel.username}</h3>
+        <div>${type}</div>
+    <#else>
+        <h3>Message likes list</h3>
+    </#if>
 
     <ul class="list-group">
 
